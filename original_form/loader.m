@@ -17,7 +17,7 @@ fprintf('\nYour wish is my command...\n\n');
 fIN=sprintf('run%ddata',num); 
 
 %load(['~/IntegratedModelling/cronos_abbrev/' workname fIN]) ; 
-load([getenv('CRONOS_SAVEJETAUTO') workname fIN]) ; 
+load([getenv('CRONOS_SAVEJETAUTO_FOLDER') workname fIN]) ; 
 
 run.number = 8;
 run = setfield(run, sprintf('n%d', num), evalin('caller', sprintf('ldr%d', num)))
