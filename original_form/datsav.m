@@ -14,6 +14,10 @@ global RUNNUM
 RUNNUM=runind;
 
 %GENERAL 
+
+
+mystruct.run_number = runind
+asold('ldr',mystruct); 
 as('tokamak','ITER');
 as('M',2); %average mass of plasma in AMU for ASDEX and JET
 as('S',680); %plasma surface area in m^2
@@ -304,10 +308,20 @@ fOUT=sprintf('run%ddata',RUNNUM);
 clear data param
 save([datapath fOUT]);
 
+function asold(str,val)
+global RUNNUM
+ws='caller';
+assignin(ws,[str sprintf('%d',RUNNUM)],val)
+
 function as(str,val)
 global RUNNUM
 ws='caller';
 assignin(ws,[str sprintf('%d',RUNNUM)],val);
+%assignin(ws,[sprintf('ldr%d',RUNNUM) str],val)
+newstruct = setfield(evalin(ws, sprintf('ldr%d',RUNNUM)), str,val);
+assignin(ws,['ldr' sprintf('%d',RUNNUM)],newstruct)
+%asold('ldr', newstruct)
+
 
 function res=ev(str)
 global RUNNUM
