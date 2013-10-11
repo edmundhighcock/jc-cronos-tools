@@ -16,7 +16,8 @@ fprintf('\nYour wish is my command...\n\n');
 
 fIN=sprintf('run%ddata',num); 
 
-load(['~/IntegratedModelling/cronos_abbrev/' workname fIN]) ; 
+%load(['~/IntegratedModelling/cronos_abbrev/' workname fIN]) ; 
+load([getenv('CRONOS_SAVEJETAUTO') workname fIN]) ; 
 
 %flag=input('Do you want the raw data as well? (1 for yes)');
 %if flag
