@@ -27,7 +27,7 @@ if runtype==7, workname='JET_ILW/'; end
 if isempty(workname), error('Runtype not recognized'); end
     
 %%%%
-    datapath=['~/IntegratedModelling/cronos/',workname];
+    datapath=[getenv('CRONOS_RUNS_FOLDER'),workname];
     fprintf(['\nDefault data directory is ',datapath]);
     runnums=input('\nChoose your favourite CRONOS runs for saving: ');
 for j=1:length(runnums)
@@ -73,7 +73,7 @@ for j=1:length(runnums)
     data=DATATEMP;
 
     %datapath=['~/IntegratedModelling/cronos_abbrev/',workname];
-    datapath=[getenv('CRONOS_SAVEJETAUTO'),workname];
+    datapath=[getenv('CRONOS_SAVEJETAUTO_FOLDER'),workname];
     fprintf(['\nDefault data save directory is ' datapath,'\n']);
     %datapath=input('Type in data directory (hit enter for default): ');
     %if isempty(datapath) datapath=datapathdef; end

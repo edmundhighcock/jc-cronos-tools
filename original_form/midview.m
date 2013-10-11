@@ -21,7 +21,7 @@
 runnum=input('\nRun number please: ');
 indnum=input('\nIndex number please: ');
 
-datapath=[getenv('CRONOS_TEMP')];
+datapath=[getenv('CRONOS_TEMP_FOLDER')];
 
 unix(['copyrun.sh ' num2str(runnum) ' ' num2str(indnum)]);
 
