@@ -13,8 +13,8 @@ global RUNNUM
 global DATATEMP
 
 
-runtype=input('\nWhat are you working on? (0 for 77914, 1 for ITER hybrid, 2 for ramp-up, 3 for JET hybrid, 4 for TS qs-scan, 5 for ASDEX hybrid, 6 for newJET hybrid archive, 7 for JET_ILW): ');
-if runtype==0, workname='JET/77914/'; end
+runtype=input('\nWhat are you working on? (0 for 77933, 1 for ITER hybrid, 2 for ramp-up, 3 for JET hybrid, 4 for TS qs-scan, 5 for ASDEX hybrid, 6 for newJET hybrid archive, 7 for JET_ILW): ');
+if runtype==0, workname='JET/77933/'; end
 if runtype==1, workname='ITER_hybrid/'; end
 if runtype==2, workname='JET_rampup/';    end
 if runtype==3, workname='JET7962/'; end
@@ -31,7 +31,7 @@ if isempty(workname), error('Runtype not recognized'); end
     fprintf(['\nDefault data directory is ',datapath]);
     runnums=input('\nChoose your favourite CRONOS runs for saving: ');
 for j=1:length(runnums)
-    %datapath=['~/IntegratedModelling/cronos/',workname];
+
     datapath=[getenv('CRONOS_RUNS_FOLDER'),workname];
     dirs=dir(datapath)
     testname=['run' num2str(runnums(j)) '_']
@@ -72,8 +72,7 @@ for j=1:length(runnums)
     structconv('DATATEMP');
     data=DATATEMP;
 
-    %datapath=['~/IntegratedModelling/cronos_abbrev/',workname];
-    datapath=[getenv('CRONOS_SAVEJETAUTO_FOLDER'),workname];
+    datapath=[getenv('CRONOS_RUNS_FOLDER'),workname, dirname, '/']
     fprintf(['\nDefault data save directory is ' datapath,'\n']);
     %datapath=input('Type in data directory (hit enter for default): ');
     %if isempty(datapath) datapath=datapathdef; end

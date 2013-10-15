@@ -1,5 +1,5 @@
-runtype=input('\nWhat are you working on? (0 for 77914, 1 for ITER hybrid, 2 for ramp-up, 3 for JET hybrid, 4 for TS qs-scan, 5 for ASDEX hybrid, 6 for newJET hybrid archive, 7 for JET_ILW): ');
-if runtype==0, workname='JET/77914/'; end
+runtype=input('\nWhat are you working on? (0 for 77933, 1 for ITER hybrid, 2 for ramp-up, 3 for JET hybrid, 4 for TS qs-scan, 5 for ASDEX hybrid, 6 for newJET hybrid archive, 7 for JET_ILW): ');
+if runtype==0, workname='JET/77933/'; end
 if runtype==1, workname='ITER_hybrid/'; end
 if runtype==2, workname='JET_rampup/';    end
 if runtype==3, workname='JET7962/'; end
@@ -16,8 +16,28 @@ fprintf('\nYour wish is my command...\n\n');
 
 fIN=sprintf('run%ddata',num); 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Load 'runXdata.mat' file %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+dirs=dir([getenv('CRONOS_RUNS_FOLDER'), workname]);
+dirname = 'none';
+
 %load(['~/IntegratedModelling/cronos_abbrev/' workname fIN]) ; 
-load([getenv('CRONOS_SAVEJETAUTO_FOLDER') workname fIN]) ; 
+%load([getenv('CRONOS_RUNS_FOLDER'), workname, fIN]) 
+
+testname = ['run' num2str(num) '_'];
+for i=1:length(dirs)
+    if strncmp(testname, dirs(i).name, length(testname))
+        dirname = dirs(i).name
+        fprintf(['Now loading ', [getenv('CRONOS_RUNS_FOLDER'), workname, dirname, '/', fIN], '\n'])
+        
+        load([getenv('CRONOS_RUNS_FOLDER'), workname, dirname, '/', fIN])
+    end
+end
+
+if (strcmp(dirname,'none'))
+    error(['Run ', num2str(num), ' not found!']);
+end
 
 %flag=input('Do you want the raw data as well? (1 for yes)');
 %if flag
@@ -27,17 +47,3 @@ load([getenv('CRONOS_SAVEJETAUTO_FOLDER') workname fIN]) ;
 %else
 %    fprintf('\nNever mind then...\n\n');
 %end
-
-%what is below is redundant JC 11.3.10
-
-if num == 119
-    otherq=q119(181,:);
-    others=s119(181,:);
-    otherpsi=psi119/(2*pi);
-end
-
-if num == 170
-    otherq=q170(181,:);
-    others=s170(181,:);
-    otherpsi=psi170/(2*pi);
-end

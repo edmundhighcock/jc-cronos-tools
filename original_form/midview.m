@@ -41,13 +41,14 @@ if strcmp(dirname,'none')
 end
     
 %filename=[compname,'_resultat_',num2str(indnum),'.mat'];
-filename=[compname];
-load([datapath filename]);
+filename=[compname]
+load([datapath filename])
 
 M=2.5; %average mass of plasma in AMU
 S=680; %plasma surface area in m^2
 Bout=4.3; %outer B in T
 
+datakp1 = datak;
 a=datakp1.geo.a;
 R=datakp1.geo.r0; 
 eps=a./R; 

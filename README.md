@@ -10,7 +10,7 @@ The following environment variables must be set:
 
 $CRONOS_RUNS_FOLDER = <path folder where Cronos output will be stored>
 $CRONOS_TEMP_FOLDER = <path to folder where results can be stored when using midview>
-$CRONOS_SAVEJETAUTO_FOLDER = <path to folder where JET data is stored>
+
 
 
 
