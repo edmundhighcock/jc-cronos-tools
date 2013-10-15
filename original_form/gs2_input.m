@@ -27,43 +27,47 @@ function gs2param = gs2_input(runnum, rho, time)
     % Ions + Impurities %
     %%%%%%%%%%%%%%%%%%%%%
 
-    Ai = param.compo.a
-    Zi = param.compo.z
+    Ai = hello.param.compo.a;
+    Zi = hello.param.compo.z;
     
     %%%%%%%%
     % dens %
     %%%%%%%%
 
-    ne = hello.prof.ne(t_index, :);
-    gs2param.ne = interp1(x, ne, rho, 'spline');
-
     ni1 = hello.data.impur.impur(t_index, :, 1);
-    gs2param.ni1 = interp1(x, ni1, rho, 'spline');
+    nref = interp1(x, ni1, rho, 'spline');
+    gs2param.ni1 = interp1(x, ni1, rho, 'spline')/nref;
     
     ni2 = hello.data.impur.impur(t_index, :, 2);
-    gs2param.ni2 = interp1(x, ni2, rho, 'spline');
+    gs2param.ni2 = interp1(x, ni2, rho, 'spline')/nref;
     
     ni3 = hello.data.impur.impur(t_index, :, 3);
-    gs2param.ni3 = interp1(x, ni3, rho, 'spline');
+    gs2param.ni3 = interp1(x, ni3, rho, 'spline')/nref;
     
     ni4 = hello.data.impur.impur(t_index, :, 4);
-    gs2param.ni4 = interp1(x, ni4, rho, 'spline');
+    gs2param.ni4 = interp1(x, ni4, rho, 'spline')/nref;
     
     ni5 = hello.data.impur.impur(t_index, :, 5);
-    gs2param.ni5 = interp1(x, ni5, rho, 'spline');
+    gs2param.ni5 = interp1(x, ni5, rho, 'spline')/nref;
     
+    ne = hello.data.prof.ne(t_index, :);
+    gs2param.ne = interp1(x, ne, rho, 'spline')/nref;
+
     %%%%%%%%
     % temp %
     %%%%%%%%
 
-    te = hello.data.prof.te(t_index, :);
-    gs2param.te = interp1(x, te, rho, 'spline');
-
     ti = hello.data.prof.ti(t_index, :);
-    gs2param.ti1 = interp1(x, ti, rho, 'spline');
-    
-    gs2param.ti2 = gs2param.ti3 = gs2param.ti4 = gs2param.ti5 = gs2param.ti1;
-    
+    tref = interp1(x, ti, rho, 'spline');
+    gs2param.ti1 = interp1(x, ti, rho, 'spline')/tref;
+    gs2param.ti2 = gs2param.ti1/tref;
+    gs2param.ti3 = gs2param.ti1/tref;
+    gs2param.ti4 = gs2param.ti1/tref;
+    gs2param.ti5 = gs2param.ti1/tref;
+
+    te = hello.data.prof.te(t_index, :);
+    gs2param.te = interp1(x, te, rho, 'spline')/tref;
+
     %%%%%%%%
     % zeff %
     %%%%%%%%
