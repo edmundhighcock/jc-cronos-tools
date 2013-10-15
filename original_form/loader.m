@@ -39,6 +39,9 @@ if (strcmp(dirname,'none'))
     error(['Run ', num2str(num), ' not found!']);
 end
 
+run.number = 8;
+run = setfield(run, sprintf('n%d', num), evalin('caller', sprintf('ldr%d', num)))
+
 %flag=input('Do you want the raw data as well? (1 for yes)');
 %if flag
 %    fIN=sprintf('run%draw',num); 
