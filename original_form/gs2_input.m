@@ -53,6 +53,12 @@ function gs2param = gs2_input(runnum, rho, time)
     ne = hello.data.prof.ne(t_index, :);
     gs2param.ne = interp1(x, ne, rho, 'spline')/nref;
 
+    %%%%%%%%%
+    % fprim %
+    %%%%%%%%%
+
+    plot(x,ni1,x,ni2,x,ni3,x,ni4,x,ni5,x,ne,'MarkerSize',10)
+
     %%%%%%%%
     % temp %
     %%%%%%%%
